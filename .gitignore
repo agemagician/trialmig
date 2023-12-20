@@ -2,7 +2,6 @@
 /work/
 /out/
 /diag/
-/tests/gen/build/
 __pycache__/
 *.pyc
 .env

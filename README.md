@@ -4,8 +4,8 @@ Batch migration of a legacy clinical-trial export, written in GnuCOBOL 3.x. It r
 fixed-length (120-byte records) EBCDIC cp037 mainframe file, decodes it field by field,
 checks every record and every cohort against the file's own trailers, and writes cleaned
 CSV for an ML pipeline plus a reconciliation report that shows where each source record
-went. All fixtures are synthetic (marker `SYNTHETIC-NOT-REAL`, fictional protocol
-HB-ONC-0417). An AI assistant helped write this code.
+went. Record layouts follow the fictional protocol HB-ONC-0417. No sample input is
+included: supply your own export file in that layout.
 
 ## Run
 
