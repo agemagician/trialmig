@@ -1,0 +1,30 @@
+*> Zoned (display) unsigned digits: raw EBCDIC zone nibble must be F and the
+*> translated byte a digit. Every zoned field in the layouts is unsigned.
+IDENTIFICATION DIVISION.
+PROGRAM-ID. ZONEDEC.
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 WS-I PIC 9(2) COMP-5.
+01 WS-B PIC 9(3) COMP-5.
+LINKAGE SECTION.
+01 LK-RAW PIC X(10).
+01 LK-ASC PIC X(10).
+01 LK-N PIC 9(2).
+01 LK-VALUE PIC 9(10).
+01 LK-STATUS PIC 9.
+PROCEDURE DIVISION USING LK-RAW LK-ASC LK-N LK-VALUE LK-STATUS.
+MAIN-PARA.
+    MOVE 0 TO LK-VALUE LK-STATUS
+    PERFORM VARYING WS-I FROM 1 BY 1 UNTIL WS-I > LK-N OR LK-STATUS = 1
+        COMPUTE WS-B = FUNCTION ORD(LK-RAW(WS-I:1)) - 1
+        IF WS-B < 240 OR WS-B > 249
+            OR LK-ASC(WS-I:1) < "0" OR LK-ASC(WS-I:1) > "9"
+            MOVE 1 TO LK-STATUS
+        ELSE
+            COMPUTE LK-VALUE = LK-VALUE * 10 + (WS-B - 240)
+        END-IF
+    END-PERFORM
+    IF LK-STATUS = 1
+        MOVE 0 TO LK-VALUE
+    END-IF
+    GOBACK.

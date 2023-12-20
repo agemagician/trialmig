@@ -1,0 +1,18 @@
+*> Shared run state, passed by reference. Counters are NOT here (see LEDGER).
+01 TMSTATE.
+   05 TM-KEY PIC X(256).
+   05 TM-KEYLEN PIC 9(3).
+   05 TM-STRICT PIC X.
+   05 TM-MODE PIC X.
+   05 TM-INPUT PIC X(256).
+   05 TM-COHORT PIC X(8).
+   05 TM-COHORT-IX PIC 9(3).
+   05 TM-PHASE PIC X.
+   05 TM-RC PIC 9(2).
+   05 TM-CAUSE PIC X(14).
+   05 TM-NCOH PIC 9(3).
+   05 TM-COH OCCURS CAP-MAX-COHORTS.
+      10 TC-CODE PIC X(8).
+      10 TC-STATUS PIC X.
+      10 TC-REASON PIC X(12).
+      10 TC-TRAILER PIC X.
